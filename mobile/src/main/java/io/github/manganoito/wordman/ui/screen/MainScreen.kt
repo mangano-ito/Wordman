@@ -15,6 +15,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import io.github.manganoito.wordman.ui.theme.WordManPreviewTheme
 
+@Composable
+internal fun MainScreen(
+    viewModel: MainScreenViewModel,
+    onAddNewWordButtonClick: () -> Unit,
+) {
+    MainScreen(
+        onAddNewWordButtonClick = onAddNewWordButtonClick,
+    )
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun MainScreen(
