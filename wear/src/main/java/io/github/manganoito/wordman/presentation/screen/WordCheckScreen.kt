@@ -16,7 +16,7 @@ import androidx.wear.compose.material.Text
 import io.github.manganoito.wordman.presentation.theme.WordManPreviewTheme
 
 @Composable
-private fun WordCheckScreen() {
+internal fun WordCheckScreen() {
     ScalingLazyColumn(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,

@@ -12,7 +12,7 @@ import androidx.wear.compose.material.Text
 import io.github.manganoito.wordman.presentation.theme.WordManPreviewTheme
 
 @Composable
-private fun MainScreen() {
+internal fun MainScreen() {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
