@@ -29,6 +29,7 @@ internal fun AddWordScreen(
     onBack: () -> Unit,
 ) {
     AddWordScreen(
+        state = viewModel.state,
         onBack = onBack,
     )
 }
@@ -36,6 +37,7 @@ internal fun AddWordScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AddWordScreen(
+    state: AddWordScreenUiState,
     onBack: () -> Unit,
 ) {
     Scaffold(
@@ -44,6 +46,8 @@ private fun AddWordScreen(
         },
     ) { paddingValues ->
         AddWordScreenContent(
+            word = state.word,
+            meaning = state.meaning,
             modifier = Modifier.padding(paddingValues),
         )
     }
@@ -71,7 +75,11 @@ private fun AddWordScreenTopBar(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun AddWordScreenContent(modifier: Modifier = Modifier) {
+private fun AddWordScreenContent(
+    word: String,
+    meaning: String,
+    modifier: Modifier = Modifier,
+) {
     Column(
         modifier = modifier.padding(
             horizontal = 16.dp,
@@ -79,13 +87,13 @@ private fun AddWordScreenContent(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         OutlinedTextField(
-            value = "",
+            value = word,
             onValueChange = {},
             modifier = Modifier.fillMaxWidth(),
             label = { Text(text = "Word") },
         )
         OutlinedTextField(
-            value = "",
+            value = meaning,
             modifier = Modifier.fillMaxWidth(),
             onValueChange = {},
             label = { Text(text = "Meaning") },
@@ -105,6 +113,7 @@ private fun AddWordScreenContent(modifier: Modifier = Modifier) {
 private fun AddWordScreenPreview() {
     WordManTheme {
         AddWordScreen(
+            state = AddWordScreenUiState(),
             onBack = {},
         )
     }
