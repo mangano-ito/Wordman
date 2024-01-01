@@ -33,6 +33,10 @@ internal fun AddWordScreen(
         onBack = onBack,
         onWordChange = viewModel::updateWord,
         onMeaningChange = viewModel::updateMeaning,
+        onCommit = {
+            viewModel.commitSave()
+            onBack()
+        },
     )
 }
 
@@ -43,6 +47,7 @@ private fun AddWordScreen(
     onBack: () -> Unit,
     onWordChange: (value: String) -> Unit,
     onMeaningChange: (value: String) -> Unit,
+    onCommit: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -52,8 +57,10 @@ private fun AddWordScreen(
         AddWordScreenContent(
             word = state.word,
             meaning = state.meaning,
+            canCommit = state.isValid,
             onWordChange = onWordChange,
             onMeaningChange = onMeaningChange,
+            onCommit = onCommit,
             modifier = Modifier.padding(paddingValues),
         )
     }
@@ -84,8 +91,10 @@ private fun AddWordScreenTopBar(
 private fun AddWordScreenContent(
     word: String,
     meaning: String,
+    canCommit: Boolean,
     onWordChange: (value: String) -> Unit,
     onMeaningChange: (value: String) -> Unit,
+    onCommit: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -108,8 +117,9 @@ private fun AddWordScreenContent(
         )
         Spacer(modifier = Modifier.height(16.dp))
         Button(
-            onClick = { /*TODO*/ },
+            onClick = onCommit,
             modifier = Modifier.align(Alignment.End),
+            enabled = canCommit,
         ) {
             Text(text = "Add")
         }
@@ -125,6 +135,7 @@ private fun AddWordScreenPreview() {
             onBack = {},
             onWordChange = {},
             onMeaningChange = {},
+            onCommit = {},
         )
     }
 }

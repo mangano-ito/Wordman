@@ -29,14 +29,11 @@ class AddWordScreenViewModel @Inject constructor(
         )
     }
 
-    fun saveWord(
-        word: String,
-        meaning: String,
-    ) {
+    fun commitSave() {
         viewModelScope.launch {
             wordRepository.addWord(
-                word = word,
-                meaning = meaning,
+                word = state.word,
+                meaning = state.meaning,
             )
         }
     }
