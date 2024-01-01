@@ -13,6 +13,8 @@ import io.github.manganoito.wordman.shared.model.Word
     version = 1,
 )
 abstract class WordManDatabase : RoomDatabase() {
+    abstract fun wordDao(): WordDao
+
     companion object {
         const val DATABASE_NAME = "wordman.db"
 
