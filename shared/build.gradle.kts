@@ -6,6 +6,8 @@ plugins {
     id("com.google.protobuf")
 }
 
+val protobufVersion = "3.25.1"
+
 android {
     namespace = "io.github.manganoito.wordman.shared"
     compileSdk = 34
@@ -40,7 +42,12 @@ android {
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:3.25.1"
+        // see https://github.com/grpc/grpc-java/issues/7690
+        artifact = if ("aarch64" == System.getProperty("os.arch")) {
+            "com.google.protobuf:protoc:$protobufVersion:osx-x86_64"
+        } else {
+            "com.google.protobuf:protoc:$protobufVersion"
+        }
     }
     generateProtoTasks {
         all().forEach { task ->
@@ -60,7 +67,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
-    implementation("com.google.protobuf:protobuf-kotlin-lite:3.25.1")
+    implementation("com.google.protobuf:protobuf-kotlin-lite:$protobufVersion")
 
     // Room
     val room_version = "2.5.0"
