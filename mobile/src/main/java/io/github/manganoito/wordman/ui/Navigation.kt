@@ -24,7 +24,12 @@ fun Navigation() {
             )
         }
         composable(Route.AddWord.path) {
-            AddWordScreen()
+            AddWordScreen(
+                viewModel = hiltViewModel(),
+                onBack = {
+                    navController.popBackStack()
+                },
+            )
         }
     }
 }
