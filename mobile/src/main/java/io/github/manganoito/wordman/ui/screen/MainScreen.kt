@@ -1,10 +1,6 @@
 package io.github.manganoito.wordman.ui.screen
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -17,9 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import io.github.manganoito.wordman.shared.model.Word
-import io.github.manganoito.wordman.ui.component.WordCard
+import io.github.manganoito.wordman.ui.component.WordCardList
 import io.github.manganoito.wordman.ui.theme.WordManPreviewTheme
 
 @Composable
@@ -70,22 +65,11 @@ internal fun MainScreen(
 private fun MainScreenContent(
     words: List<Word>,
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(
-        horizontal = 16.dp,
-    ),
 ) {
-    LazyColumn(
+    WordCardList(
+        words = words,
         modifier = modifier,
-        contentPadding = contentPadding,
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-        items(words) { word ->
-            WordCard(
-                word = word.value,
-                meaning = word.meaning,
-            )
-        }
-    }
+    )
 }
 
 @Preview
