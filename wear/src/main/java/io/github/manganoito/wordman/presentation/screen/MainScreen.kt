@@ -12,7 +12,9 @@ import androidx.wear.compose.material.Text
 import io.github.manganoito.wordman.presentation.theme.WordManPreviewTheme
 
 @Composable
-internal fun MainScreen() {
+internal fun MainScreen(
+    onWordCheckButtonClick: () -> Unit,
+) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
@@ -21,7 +23,7 @@ internal fun MainScreen() {
             label = {
                 Text(text = "Try Word Check Now")
             },
-            onClick = { /*TODO*/ },
+            onClick = onWordCheckButtonClick,
         )
     }
 }
@@ -29,5 +31,7 @@ internal fun MainScreen() {
 @Preview(device = Devices.WEAR_OS_SMALL_ROUND, showSystemUi = true)
 @Composable
 private fun MainScreenPreview() = WordManPreviewTheme {
-    MainScreen()
+    MainScreen(
+        onWordCheckButtonClick = {},
+    )
 }

@@ -12,7 +12,11 @@ fun Navigation() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Route.Main.path) {
         composable(Route.Main.path) {
-            MainScreen()
+            MainScreen(
+                onWordCheckButtonClick = {
+                    navController.navigate(Route.WordCheck.path)
+                },
+            )
         }
         composable(Route.WordCheck.path) {
             WordCheckScreen()
