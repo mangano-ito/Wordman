@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices
@@ -16,7 +17,17 @@ import androidx.wear.compose.material.Text
 import io.github.manganoito.wordman.presentation.theme.WordManPreviewTheme
 
 @Composable
-internal fun WordCheckScreen() {
+internal fun WordCheckScreen(
+    viewModel: WordCheckScreenViewModel,
+) {
+    LaunchedEffect(Unit) {
+        viewModel.doSync()
+    }
+    WordCheckScreen()
+}
+
+@Composable
+private fun WordCheckScreen() {
     ScalingLazyColumn(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
