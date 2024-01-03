@@ -1,16 +1,21 @@
 package io.github.manganoito.wordman.ui.screen
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import io.github.manganoito.wordman.shared.model.Word
@@ -66,10 +71,32 @@ private fun MainScreenContent(
     words: List<Word>,
     modifier: Modifier = Modifier,
 ) {
-    WordCardList(
-        words = words,
-        modifier = modifier,
-    )
+    if (words.isEmpty()) {
+        EmptyWordCardList(
+            modifier = modifier,
+        )
+    } else {
+        WordCardList(
+            words = words,
+            modifier = modifier,
+        )
+    }
+}
+
+@Composable
+private fun EmptyWordCardList(modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center,
+    ) {
+        Text(
+            text = "No Words",
+            style = MaterialTheme.typography.bodyLarge,
+            color = LocalContentColor.current.copy(
+                alpha = 0.6f,
+            ),
+        )
+    }
 }
 
 @Preview
@@ -88,6 +115,15 @@ private fun MainScreenPreview() = WordManPreviewTheme {
                 meaning = "成句，熟語，慣用句，決まり文句",
             ),
         ),
+        onAddNewWordButtonClick = {},
+    )
+}
+
+@Preview
+@Composable
+private fun MainScreenNoWordsPreview() = WordManPreviewTheme {
+    MainScreen(
+        words = emptyList(),
         onAddNewWordButtonClick = {},
     )
 }
