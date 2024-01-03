@@ -11,11 +11,9 @@ abstract class WearWordSyncServerServiceBase :
 
     @ExperimentalHorologistApi
     override val registry: WearDataLayerRegistry by lazy {
-        WearDataLayerRegistry.fromContext(
-            application = applicationContext,
+        createWearDataLayerRegistry(
+            applicationContext = applicationContext,
             coroutineScope = lifecycleScope,
-        ).apply {
-            registerSerializer(WordDataSerializer)
-        }
+        )
     }
 }
