@@ -48,6 +48,7 @@ class AddWordScreenViewModel @Inject constructor(
             )
             val nodes = wearDataLayerRegistry.nodeClient.connectedNodes.await()
             val config = activityConfig {
+                packageName = "io.github.manganoito.wordman"
                 classFullName = "io.github.manganoito.wordman.presentation.WordRememberedActivity"
             }
             nodes.forEach {
