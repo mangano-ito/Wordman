@@ -17,6 +17,18 @@ class AddWordScreenViewModel @Inject constructor(
     var state by mutableStateOf(AddWordScreenUiState())
         private set
 
+    fun updateWord(value: String) {
+        state = state.copy(
+            word = value,
+        )
+    }
+
+    fun updateMeaning(value: String) {
+        state = state.copy(
+            meaning = value,
+        )
+    }
+
     fun saveWord(
         word: String,
         meaning: String,

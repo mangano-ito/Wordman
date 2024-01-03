@@ -31,6 +31,8 @@ internal fun AddWordScreen(
     AddWordScreen(
         state = viewModel.state,
         onBack = onBack,
+        onWordChange = viewModel::updateWord,
+        onMeaningChange = viewModel::updateMeaning,
     )
 }
 
@@ -39,6 +41,8 @@ internal fun AddWordScreen(
 private fun AddWordScreen(
     state: AddWordScreenUiState,
     onBack: () -> Unit,
+    onWordChange: (value: String) -> Unit,
+    onMeaningChange: (value: String) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -48,6 +52,8 @@ private fun AddWordScreen(
         AddWordScreenContent(
             word = state.word,
             meaning = state.meaning,
+            onWordChange = onWordChange,
+            onMeaningChange = onMeaningChange,
             modifier = Modifier.padding(paddingValues),
         )
     }
@@ -78,6 +84,8 @@ private fun AddWordScreenTopBar(
 private fun AddWordScreenContent(
     word: String,
     meaning: String,
+    onWordChange: (value: String) -> Unit,
+    onMeaningChange: (value: String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -88,14 +96,14 @@ private fun AddWordScreenContent(
     ) {
         OutlinedTextField(
             value = word,
-            onValueChange = {},
+            onValueChange = onWordChange,
             modifier = Modifier.fillMaxWidth(),
             label = { Text(text = "Word") },
         )
         OutlinedTextField(
             value = meaning,
             modifier = Modifier.fillMaxWidth(),
-            onValueChange = {},
+            onValueChange = onMeaningChange,
             label = { Text(text = "Meaning") },
         )
         Spacer(modifier = Modifier.height(16.dp))
@@ -115,6 +123,8 @@ private fun AddWordScreenPreview() {
         AddWordScreen(
             state = AddWordScreenUiState(),
             onBack = {},
+            onWordChange = {},
+            onMeaningChange = {},
         )
     }
 }
