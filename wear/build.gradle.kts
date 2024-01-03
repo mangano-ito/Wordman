@@ -54,6 +54,7 @@ dependencies {
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.wear.compose:compose-material:1.1.2")
     implementation("androidx.wear.compose:compose-foundation:1.1.2")
     implementation("androidx.activity:activity-compose:1.7.2")
