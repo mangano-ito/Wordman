@@ -82,6 +82,12 @@ dependencies {
     testImplementation("com.google.dagger:hilt-android-testing:2.50")
     kspTest("com.google.dagger:hilt-compiler:2.50")
 
+    // Coroutines
+    val coroutinesVersion = "1.7.3"
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$coroutinesVersion")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
