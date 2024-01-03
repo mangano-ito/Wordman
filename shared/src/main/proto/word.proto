@@ -25,7 +25,6 @@ message RandomWordResponse {
 }
 
 service WordSyncServerService {
-  rpc getRandomWord(.google.protobuf.Empty) returns (WordData);
   rpc getRandomWords(RandomWordRequest) returns (RandomWordResponse);
   rpc getWordCount(.google.protobuf.Empty) returns (WordCountData);
 }
