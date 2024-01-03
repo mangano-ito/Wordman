@@ -7,9 +7,9 @@ option java_outer_classname = "WordSyncProtoData";
 option java_package = "io.github.manganoito.wordman.shared.data.proto";
 
 message WordData {
-  string value = 1;
-  string meaning = 2;
-  .google.protobuf.Timestamp updated = 3;
+  uint64 id = 1;
+  string value = 2;
+  string meaning = 3;
 }
 
 message WordCountData {
