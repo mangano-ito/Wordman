@@ -27,9 +27,9 @@ internal fun MainScreen(
     viewModel: MainScreenViewModel,
     onAddNewWordButtonClick: () -> Unit,
 ) {
-    val words by viewModel.words
+    val state = viewModel.state
     MainScreen(
-        words = words,
+        words = state.words,
         onAddNewWordButtonClick = onAddNewWordButtonClick,
     )
 }
