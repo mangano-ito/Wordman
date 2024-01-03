@@ -3,6 +3,7 @@ package io.github.manganoito.wordman.presentation.screen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -111,9 +112,13 @@ private fun WordCheckAnswerList(
     ) {
         answers.forEachIndexed { index, answer ->
             Chip(
-                onClick = { onAnswer(index) },
                 label = {
-                    Text(text = "${index + 1}: $answer")
+                    Text(text = answer)
+                },
+                onClick = { onAnswer(index) },
+                modifier = Modifier.fillMaxWidth(),
+                icon = {
+                    Text(text = "${index + 1}")
                 },
             )
         }
