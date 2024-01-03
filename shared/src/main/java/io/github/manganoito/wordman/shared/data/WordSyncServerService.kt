@@ -4,8 +4,11 @@ import com.google.protobuf.Empty
 import com.google.protobuf.Timestamp
 import io.github.manganoito.wordman.shared.data.proto.WordSyncProtoData.WordData
 import io.github.manganoito.wordman.shared.data.proto.WordSyncServerServiceGrpcKt
+import io.github.manganoito.wordman.shared.repository.WordRepository
 
-class WordSyncServerService : WordSyncServerServiceGrpcKt.WordSyncServerServiceCoroutineImplBase() {
+class WordSyncServerService(
+    private val wordRepository: WordRepository,
+) : WordSyncServerServiceGrpcKt.WordSyncServerServiceCoroutineImplBase() {
     override suspend fun getRandomWord(request: Empty): WordData {
         return WordData.newBuilder()
             .setValue("test")
