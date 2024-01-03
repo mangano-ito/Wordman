@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">wordman</string>
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
-    <string name="hello_world">From the Square world,\nHello, %1$s!</string>
+    <plurals name="word_remembered_congrats_message">
+        <item quantity="one">Great!\nYou’ve remembered\na new word!</item>
+        <item quantity="other">Great!\nYou’ve remembered\n%d new words!</item>
+    </plurals>
 </resources>

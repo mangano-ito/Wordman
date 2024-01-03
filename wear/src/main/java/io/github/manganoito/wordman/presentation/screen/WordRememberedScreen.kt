@@ -67,7 +67,9 @@ private fun WordRememberedScreen(
                     onFinish()
                 },
             ) {
-                WordRememberedNotice()
+                WordRememberedNotice(
+                    wordCount = state.wordCount,
+                )
             }
         }
     }
