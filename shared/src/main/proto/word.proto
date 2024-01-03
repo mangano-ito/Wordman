@@ -12,6 +12,10 @@ message WordData {
   .google.protobuf.Timestamp updated = 3;
 }
 
+message WordCountData {
+  uint64 count = 1;
+}
+
 service WordSyncServerService {
   rpc getRandomWord(.google.protobuf.Empty) returns (WordData);
 }

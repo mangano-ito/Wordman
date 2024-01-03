@@ -15,5 +15,6 @@ fun createWearDataLayerRegistry(
         coroutineScope = coroutineScope,
     ).apply {
         registerSerializer(WordDataSerializer)
+        registerSerializer(WordCountDataSerializer)
     }
 }
