@@ -8,4 +8,5 @@ data class Word(
     @PrimaryKey
     val id: Int,
     val value: String,
+    val meaning: String,
 )
