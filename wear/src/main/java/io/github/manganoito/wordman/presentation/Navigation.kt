@@ -14,6 +14,7 @@ fun Navigation() {
     NavHost(navController = navController, startDestination = Route.Main.path) {
         composable(Route.Main.path) {
             MainScreen(
+                viewModel = hiltViewModel(),
                 onWordCheckButtonClick = {
                     navController.navigate(Route.WordCheck.path)
                 },
