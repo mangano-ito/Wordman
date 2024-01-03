@@ -17,6 +17,9 @@ interface WordDao {
     @Query("SELECT * FROM word ORDER BY RANDOM() LIMIT :count")
     fun getSomeRandomWords(count: Int): List<Word>
 
+    @Query("SELECT COUNT(*) FROM word")
+    fun getWordCount(): Int
+
     @Query("SELECT * FROM word")
     fun observeAllWords(): Flow<List<Word>>
 }
