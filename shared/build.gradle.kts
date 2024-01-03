@@ -69,6 +69,9 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0")
     implementation("com.google.protobuf:protobuf-kotlin-lite:$protobufVersion")
 
+    // Horologist - DataLayer
+    implementation("com.google.android.horologist:horologist-datalayer-grpc:0.5.16")
+
     // Room
     val room_version = "2.5.0"
     api("androidx.room:room-runtime:$room_version")
