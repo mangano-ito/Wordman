@@ -1,18 +1,15 @@
 package io.github.manganoito.wordman.presentation.screen
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.Text
-import io.github.manganoito.wordman.presentation.component.DebugInfo
 import io.github.manganoito.wordman.presentation.theme.WordManPreviewTheme
 
 @Composable
@@ -32,24 +29,14 @@ private fun MainScreen(
     state: MainScreenUiState,
     onWordCheckButtonClick: () -> Unit,
 ) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center,
-    ) {
-        ScalingLazyColumn {
-            item {
-                Chip(
-                    label = {
-                        Text(text = "Try Word Check Now")
-                    },
-                    onClick = onWordCheckButtonClick,
-                )
-            }
-            item {
-                DebugInfo(
-                    nodes = state.nodes,
-                )
-            }
+    ScalingLazyColumn(modifier = Modifier.fillMaxSize()) {
+        item {
+            Chip(
+                label = {
+                    Text(text = "Try Word Check Now")
+                },
+                onClick = onWordCheckButtonClick,
+            )
         }
     }
 }
