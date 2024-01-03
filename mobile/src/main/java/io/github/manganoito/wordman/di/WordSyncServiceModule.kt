@@ -9,7 +9,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ServiceComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ServiceScoped
-import io.github.manganoito.wordman.shared.data.WordSyncDataSerializer
+import io.github.manganoito.wordman.shared.data.WordDataSerializer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -34,7 +34,7 @@ class WordSyncServiceModule {
             application = applicationContext,
             coroutineScope = coroutineScope,
         ).apply {
-            registerSerializer(WordSyncDataSerializer)
+            registerSerializer(WordDataSerializer)
         }
     }
 }

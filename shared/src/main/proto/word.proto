@@ -6,13 +6,12 @@ import "google/protobuf/timestamp.proto";
 option java_outer_classname = "WordSyncProtoData";
 option java_package = "io.github.manganoito.wordman.shared.data.proto";
 
-message WordSyncData {
+message WordData {
   string value = 1;
   string meaning = 2;
   .google.protobuf.Timestamp updated = 3;
 }
 
-service WordSyncService {
-  rpc getRandomWord(.google.protobuf.Empty) returns (WordSyncData);
-  rpc notifyNewWord(WordSyncData) returns (.google.protobuf.Empty);
+service WordSyncServerService {
+  rpc getRandomWord(.google.protobuf.Empty) returns (WordData);
 }
