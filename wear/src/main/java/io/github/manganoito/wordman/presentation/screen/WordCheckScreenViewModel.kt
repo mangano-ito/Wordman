@@ -26,24 +26,19 @@ class WordCheckScreenViewModel @Inject constructor(
 
     private fun load() {
         viewModelScope.launch {
+            val words = wordSyncServerService.getRandomWords(
+                io.github.manganoito.wordman.shared.data.proto.WordSyncProtoData.RandomWordRequest.newBuilder()
+                    .setCount(3)
+                    .build(),
+            ).wordsList.map {
+                Word(
+                    id = it.id.toInt(),
+                    value = it.value,
+                    meaning = it.meaning,
+                )
+            }
             state = WordCheckScreenUiState.Loaded(
-                words = listOf(
-                    Word(
-                        id = 0,
-                        value = "Hello",
-                        meaning = "こんにちは",
-                    ),
-                    Word(
-                        id = 1,
-                        value = "Goodbye",
-                        meaning = "さようなら",
-                    ),
-                    Word(
-                        id = 2,
-                        value = "Hi",
-                        meaning = "やあ",
-                    ),
-                ),
+                words = words,
             )
         }
     }
