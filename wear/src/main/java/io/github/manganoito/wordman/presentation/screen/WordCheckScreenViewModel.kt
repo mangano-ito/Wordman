@@ -5,18 +5,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.protobuf.Empty
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.github.manganoito.wordman.shared.data.proto.WordSyncServiceGrpcKt
+import io.github.manganoito.wordman.shared.data.proto.WordSyncServerServiceGrpcKt
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class WordCheckScreenViewModel @Inject constructor(
-    private val wordSyncClient: WordSyncServiceGrpcKt.WordSyncServiceCoroutineStub,
+    private val wordSyncServerService: WordSyncServerServiceGrpcKt.WordSyncServerServiceCoroutineStub,
 ) : ViewModel() {
     fun doSync() {
         viewModelScope.launch {
             try {
-                val result = wordSyncClient.getRandomWord(Empty.newBuilder().build())
+                val result = wordSyncServerService.getRandomWord(Empty.newBuilder().build())
                 Log.d("WordSyncService", "Result: $result")
             } catch (e: Throwable) {
                 Log.e("WordSyncService", "Error", e)

@@ -24,7 +24,7 @@
         </activity>
 
         <service
-            android:name=".shared.data.WearWordSyncService"
+            android:name=".shared.data.WearWordSyncServerService"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.android.gms.wearable.REQUEST_RECEIVED" />

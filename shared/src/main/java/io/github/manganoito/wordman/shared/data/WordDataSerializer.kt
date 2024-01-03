@@ -3,23 +3,23 @@ package io.github.manganoito.wordman.shared.data
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
 import androidx.datastore.preferences.protobuf.InvalidProtocolBufferException
-import io.github.manganoito.wordman.shared.data.proto.WordSyncProtoData.WordSyncData
+import io.github.manganoito.wordman.shared.data.proto.WordSyncProtoData.WordData
 import java.io.InputStream
 import java.io.OutputStream
 
-object WordSyncDataSerializer : Serializer<WordSyncData> {
-    override val defaultValue: WordSyncData
-        get() = WordSyncData.getDefaultInstance()
+object WordDataSerializer : Serializer<WordData> {
+    override val defaultValue: WordData
+        get() = WordData.getDefaultInstance()
 
-    override suspend fun readFrom(input: InputStream): WordSyncData {
+    override suspend fun readFrom(input: InputStream): WordData {
         try {
-            return WordSyncData.parseFrom(input)
+            return WordData.parseFrom(input)
         } catch (exception: InvalidProtocolBufferException) {
             throw CorruptionException("Cannot read proto.", exception)
         }
     }
 
-    override suspend fun writeTo(t: WordSyncData, output: OutputStream) {
+    override suspend fun writeTo(t: WordData, output: OutputStream) {
         t.writeTo(output)
     }
 }
