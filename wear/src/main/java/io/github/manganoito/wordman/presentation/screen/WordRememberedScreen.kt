@@ -9,13 +9,45 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.wear.compose.material.CircularProgressIndicator
 import androidx.wear.compose.material.dialog.Confirmation
 import androidx.wear.compose.material.dialog.Dialog
 import io.github.manganoito.wordman.presentation.component.WordRememberedNotice
 import io.github.manganoito.wordman.presentation.theme.WordManPreviewTheme
 
 @Composable
-fun WordRememberedScreen(
+internal fun WordRememberedScreen(
+    viewModel: WordRememberedScreenViewModel,
+    onFinish: () -> Unit,
+) {
+    WordRememberedScreen(
+        state = viewModel.state,
+        onFinish = onFinish,
+    )
+}
+
+@Composable
+private fun WordRememberedScreen(
+    state: WordRememberedScreenUiState,
+    onFinish: () -> Unit,
+) {
+    when (state) {
+        is WordRememberedScreenUiState.Loading -> {
+            CircularProgressIndicator()
+        }
+
+        is WordRememberedScreenUiState.Loaded -> {
+            WordRememberedScreen(
+                state = state,
+                onFinish = onFinish,
+            )
+        }
+    }
+}
+
+@Composable
+private fun WordRememberedScreen(
+    state: WordRememberedScreenUiState.Loaded,
     onFinish: () -> Unit,
 ) {
     Box(
@@ -45,6 +77,9 @@ fun WordRememberedScreen(
 @Composable
 private fun WordRememberedScreenPreview() = WordManPreviewTheme {
     WordRememberedScreen(
+        state = WordRememberedScreenUiState.Loaded(
+            wordCount = 1,
+        ),
         onFinish = {},
     )
 }
