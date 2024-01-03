@@ -1,6 +1,7 @@
 package io.github.manganoito.wordman.ui
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -16,6 +17,7 @@ fun Navigation() {
     ) {
         composable(Route.Main.path) {
             MainScreen(
+                viewModel = hiltViewModel(),
                 onAddNewWordButtonClick = {
                     navController.navigate(Route.AddWord.path)
                 },
