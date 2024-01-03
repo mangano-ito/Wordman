@@ -18,4 +18,5 @@ message WordCountData {
 
 service WordSyncServerService {
   rpc getRandomWord(.google.protobuf.Empty) returns (WordData);
+  rpc getWordCount(.google.protobuf.Empty) returns (WordCountData);
 }
