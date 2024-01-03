@@ -1,6 +1,7 @@
 package io.github.manganoito.wordman.presentation
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -19,7 +20,9 @@ fun Navigation() {
             )
         }
         composable(Route.WordCheck.path) {
-            WordCheckScreen()
+            WordCheckScreen(
+                viewModel = hiltViewModel(),
+            )
         }
     }
 }
