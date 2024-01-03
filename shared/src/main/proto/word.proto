@@ -16,7 +16,16 @@ message WordCountData {
   uint64 count = 1;
 }
 
+message RandomWordRequest {
+  uint32 count = 1;
+}
+
+message RandomWordResponse {
+  repeated WordData words = 1;
+}
+
 service WordSyncServerService {
   rpc getRandomWord(.google.protobuf.Empty) returns (WordData);
+  rpc getRandomWords(RandomWordRequest) returns (RandomWordResponse);
   rpc getWordCount(.google.protobuf.Empty) returns (WordCountData);
 }

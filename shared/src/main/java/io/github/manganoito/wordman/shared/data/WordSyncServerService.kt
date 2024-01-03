@@ -2,6 +2,7 @@ package io.github.manganoito.wordman.shared.data
 
 import com.google.protobuf.Empty
 import com.google.protobuf.Timestamp
+import io.github.manganoito.wordman.shared.data.proto.WordSyncProtoData
 import io.github.manganoito.wordman.shared.data.proto.WordSyncProtoData.WordCountData
 import io.github.manganoito.wordman.shared.data.proto.WordSyncProtoData.WordData
 import io.github.manganoito.wordman.shared.data.proto.WordSyncServerServiceGrpcKt
@@ -14,6 +15,13 @@ class WordSyncServerService(
     override suspend fun getRandomWord(request: Empty): WordData {
         val word = wordRepository.getSomeRandomWords(1).firstOrNull()
         return word?.toWordData() ?: emptyWordData
+    }
+
+    override suspend fun getRandomWords(request: WordSyncProtoData.RandomWordRequest): WordSyncProtoData.RandomWordResponse {
+        val words = wordRepository.getSomeRandomWords(request.count)
+        return WordSyncProtoData.RandomWordResponse.newBuilder()
+            .addAllWords(words.map { it.toWordData() })
+            .build()
     }
 
     override suspend fun getWordCount(request: Empty): WordCountData {
