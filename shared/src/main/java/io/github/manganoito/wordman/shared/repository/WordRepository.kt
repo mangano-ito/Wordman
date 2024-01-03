@@ -19,5 +19,7 @@ interface WordRepository {
 
     suspend fun getAllWords(): List<Word>
 
+    suspend fun getSomeRandomWords(count: Int): List<Word>
+
     fun observeAllWords(): Flow<List<Word>>
 }
