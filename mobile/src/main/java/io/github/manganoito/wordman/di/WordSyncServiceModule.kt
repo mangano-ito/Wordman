@@ -10,6 +10,8 @@ import dagger.hilt.android.components.ServiceComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ServiceScoped
 import io.github.manganoito.wordman.shared.data.WordDataSerializer
+import io.github.manganoito.wordman.shared.data.WordSyncServerService
+import io.github.manganoito.wordman.shared.repository.WordRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -36,5 +38,15 @@ class WordSyncServiceModule {
         ).apply {
             registerSerializer(WordDataSerializer)
         }
+    }
+
+    @Provides
+    @ServiceScoped
+    fun provideWordSyncServerService(
+        wordRepository: WordRepository,
+    ): WordSyncServerService {
+        return WordSyncServerService(
+            wordRepository = wordRepository,
+        )
     }
 }

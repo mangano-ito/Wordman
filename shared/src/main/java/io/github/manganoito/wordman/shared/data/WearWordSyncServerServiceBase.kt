@@ -6,8 +6,9 @@ import com.google.android.horologist.data.WearDataLayerRegistry
 import com.google.android.horologist.datalayer.grpc.server.BaseGrpcDataService
 import io.github.manganoito.wordman.shared.data.proto.WordSyncServerServiceGrpcKt
 
-class WearWordSyncServerService :
+abstract class WearWordSyncServerServiceBase :
     BaseGrpcDataService<WordSyncServerServiceGrpcKt.WordSyncServerServiceCoroutineImplBase>() {
+
     @ExperimentalHorologistApi
     override val registry: WearDataLayerRegistry by lazy {
         WearDataLayerRegistry.fromContext(
@@ -16,9 +17,5 @@ class WearWordSyncServerService :
         ).apply {
             registerSerializer(WordDataSerializer)
         }
-    }
-
-    override fun buildService(): WordSyncServerServiceGrpcKt.WordSyncServerServiceCoroutineImplBase {
-        return WordSyncServerService()
     }
 }
