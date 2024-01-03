@@ -11,7 +11,7 @@ import dagger.hilt.android.ActivityRetainedLifecycle
 import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityRetainedScoped
-import io.github.manganoito.wordman.shared.data.WordDataSerializer
+import io.github.manganoito.wordman.shared.data.createWearDataLayerRegistry
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -39,12 +39,10 @@ class DataLayerModule {
         @ApplicationContext applicationContext: Context,
         coroutineScope: CoroutineScope,
     ): WearDataLayerRegistry {
-        return WearDataLayerRegistry.fromContext(
-            application = applicationContext,
+        return createWearDataLayerRegistry(
+            applicationContext = applicationContext,
             coroutineScope = coroutineScope,
-        ).apply {
-            registerSerializer(WordDataSerializer)
-        }
+        )
     }
 
     @Provides

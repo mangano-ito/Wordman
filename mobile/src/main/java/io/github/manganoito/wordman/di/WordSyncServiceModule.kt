@@ -9,8 +9,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ServiceComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ServiceScoped
-import io.github.manganoito.wordman.shared.data.WordDataSerializer
 import io.github.manganoito.wordman.shared.data.WordSyncServerService
+import io.github.manganoito.wordman.shared.data.createWearDataLayerRegistry
 import io.github.manganoito.wordman.shared.repository.WordRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,12 +32,10 @@ class WordSyncServiceModule {
         @ApplicationContext applicationContext: Context,
         coroutineScope: CoroutineScope,
     ): WearDataLayerRegistry {
-        return WearDataLayerRegistry.fromContext(
-            application = applicationContext,
+        return createWearDataLayerRegistry(
+            applicationContext = applicationContext,
             coroutineScope = coroutineScope,
-        ).apply {
-            registerSerializer(WordDataSerializer)
-        }
+        )
     }
 
     @Provides
