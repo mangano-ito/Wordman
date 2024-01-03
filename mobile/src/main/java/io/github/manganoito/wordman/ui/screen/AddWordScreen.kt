@@ -1,4 +1,4 @@
-package io.github.manganoito.wordman.ui
+package io.github.manganoito.wordman.ui.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding

@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import io.github.manganoito.wordman.ui.screen.AddWordScreen
+import io.github.manganoito.wordman.ui.screen.MainScreen
 
 @Composable
 fun Navigation() {
