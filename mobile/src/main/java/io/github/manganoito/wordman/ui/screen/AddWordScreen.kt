@@ -17,15 +17,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import io.github.manganoito.wordman.ui.theme.WordManTheme
 
+@Composable
+internal fun AddWordScreen(
+    viewModel: AddWordScreenViewModel,
+    onBack: () -> Unit,
+) {
+    AddWordScreen(
+        onBack = onBack,
+    )
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun AddWordScreen() {
+private fun AddWordScreen(
+    onBack: () -> Unit,
+) {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text(text = "Add Word") },
                 navigationIcon = {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
                             contentDescription = "Go Back",
@@ -60,6 +72,8 @@ private fun AddWordScreenContent(modifier: Modifier = Modifier) {
 @Composable
 private fun AddWordScreenPreview() {
     WordManTheme {
-        AddWordScreen()
+        AddWordScreen(
+            onBack = {},
+        )
     }
 }
