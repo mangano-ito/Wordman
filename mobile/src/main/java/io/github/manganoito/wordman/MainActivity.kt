@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.manganoito.wordman.ui.Navigation
+import io.github.manganoito.wordman.ui.theme.WordManTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -13,7 +14,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContent {
-            Navigation()
+            WordManTheme {
+                Navigation()
+            }
         }
     }
 }
