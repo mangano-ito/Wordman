@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,9 +25,6 @@ import io.github.manganoito.wordman.shared.model.Word
 internal fun WordCheckScreen(
     viewModel: WordCheckScreenViewModel,
 ) {
-    LaunchedEffect(Unit) {
-        viewModel.doSync()
-    }
     WordCheckScreen(
         state = viewModel.state,
     )

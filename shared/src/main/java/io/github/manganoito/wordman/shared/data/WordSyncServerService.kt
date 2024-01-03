@@ -11,11 +11,6 @@ import io.github.manganoito.wordman.shared.repository.WordRepository
 class WordSyncServerService(
     private val wordRepository: WordRepository,
 ) : WordSyncServerServiceGrpcKt.WordSyncServerServiceCoroutineImplBase() {
-    override suspend fun getRandomWord(request: Empty): WordData {
-        val word = wordRepository.getSomeRandomWords(1).firstOrNull()
-        return word?.toWordData() ?: emptyWordData
-    }
-
     override suspend fun getRandomWords(request: WordSyncProtoData.RandomWordRequest): WordSyncProtoData.RandomWordResponse {
         val words = wordRepository.getSomeRandomWords(request.count)
         return WordSyncProtoData.RandomWordResponse.newBuilder()
@@ -30,11 +25,6 @@ class WordSyncServerService(
             .build()
     }
 }
-
-private val emptyWordData = WordData.newBuilder()
-    .setValue("test")
-    .setMeaning("〔機器や製法などの〕検査、試験運転、動作確認")
-    .build()
 
 private fun Word.toWordData(): WordData = WordData.newBuilder()
     .setValue(value)

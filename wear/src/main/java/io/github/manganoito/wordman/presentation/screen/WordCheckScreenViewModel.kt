@@ -1,12 +1,10 @@
 package io.github.manganoito.wordman.presentation.screen
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.protobuf.Empty
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.github.manganoito.wordman.shared.data.proto.WordSyncServerServiceGrpcKt
 import io.github.manganoito.wordman.shared.model.Word
@@ -43,14 +41,6 @@ class WordCheckScreenViewModel @Inject constructor(
         }
     }
 
-    fun doSync() {
-        viewModelScope.launch {
-            try {
-                val result = wordSyncServerService.getRandomWord(Empty.newBuilder().build())
-                Log.d("WordSyncService", "Result: $result")
-            } catch (e: Throwable) {
-                Log.e("WordSyncService", "Error", e)
-            }
-        }
+    fun answer(word: Word) {
     }
 }
