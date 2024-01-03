@@ -49,6 +49,14 @@ protobuf {
             "com.google.protobuf:protoc:$protobufVersion"
         }
     }
+    plugins {
+        create("grpc") {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.60.1"
+        }
+        create("grpckt") {
+            artifact = "io.grpc:protoc-gen-grpc-kotlin:1.3.0:jdk8@jar"
+        }
+    }
     generateProtoTasks {
         all().forEach { task ->
             task.builtins {
@@ -56,6 +64,14 @@ protobuf {
                     option("lite")
                 }
                 create("kotlin") {
+                    option("lite")
+                }
+            }
+            task.plugins {
+                create("grpc") {
+                    option("lite")
+                }
+                create("grpckt") {
                     option("lite")
                 }
             }
