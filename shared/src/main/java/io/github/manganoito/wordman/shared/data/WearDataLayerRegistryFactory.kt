@@ -16,5 +16,7 @@ fun createWearDataLayerRegistry(
     ).apply {
         registerSerializer(WordDataSerializer)
         registerSerializer(WordCountDataSerializer)
+        registerSerializer(RandomWordRequestSerializer)
+        registerSerializer(RandomWordResponseSerializer)
     }
 }
