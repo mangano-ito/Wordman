@@ -25,7 +25,7 @@ import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TimeText
 import io.github.manganoito.wordman.R
-import io.github.manganoito.wordman.presentation.theme.WordmanTheme
+import io.github.manganoito.wordman.presentation.theme.WordManTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun WearApp(greetingName: String) {
-    WordmanTheme {
+    WordManTheme {
         Box(
             modifier = Modifier
                 .fillMaxSize()
