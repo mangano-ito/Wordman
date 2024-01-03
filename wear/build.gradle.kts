@@ -30,11 +30,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         compose = true
@@ -58,6 +58,12 @@ dependencies {
     implementation("androidx.wear.compose:compose-foundation:1.1.2")
     implementation("androidx.activity:activity-compose:1.7.2")
     implementation("androidx.core:core-splashscreen:1.0.1")
+
+    // Horologist - DataLayer
+    val horologistDataLayerVersion = "0.5.16"
+    implementation("com.google.android.horologist:horologist-datalayer:$horologistDataLayerVersion")
+    implementation("com.google.android.horologist:horologist-datalayer-grpc:$horologistDataLayerVersion")
+    implementation("com.google.android.horologist:horologist-datalayer-watch:$horologistDataLayerVersion")
 
     // Dagger/Hilt
     implementation("com.google.dagger:hilt-android:2.50")
