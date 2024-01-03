@@ -35,6 +35,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".presentation.WordRememberedActivity"
+            android:exported="false"
+            android:taskAffinity=".main"
+            android:theme="@android:style/Theme.DeviceDefault" />
     </application>
 
 </manifest>
