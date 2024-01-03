@@ -20,6 +20,11 @@ class DefaultWordRepository @Inject constructor(
         wordDao.getAllWords()
     }
 
+    override suspend fun getSomeRandomWords(count: Int): List<Word> =
+        withContext(coroutineContext) {
+            wordDao.getSomeRandomWords(count)
+        }
+
     override fun observeAllWords(): Flow<List<Word>> {
         return wordDao.observeAllWords()
     }
