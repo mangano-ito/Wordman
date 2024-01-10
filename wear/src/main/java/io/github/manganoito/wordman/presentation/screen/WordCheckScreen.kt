@@ -2,8 +2,13 @@ package io.github.manganoito.wordman.presentation.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,7 +22,9 @@ import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.CircularProgressIndicator
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.ScalingLazyColumn
+import androidx.wear.compose.material.ScalingLazyListScope
 import androidx.wear.compose.material.Text
+import androidx.wear.compose.material.itemsIndexed
 import io.github.manganoito.wordman.presentation.component.CorrectAnswerDialog
 import io.github.manganoito.wordman.presentation.component.CorrectAnswerNotice
 import io.github.manganoito.wordman.presentation.component.WrongAnswerDialog
@@ -79,19 +86,18 @@ private fun WordCheckScreenContent(
     ScalingLazyColumn(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         item {
             WordCheckHeader(
                 word = question,
             )
+            Spacer(modifier = Modifier.height(12.dp))
         }
-        item {
-            WordCheckAnswerList(
-                answers = answers,
-                onAnswer = onAnswer,
-            )
-        }
+        wordCheckAnswerList(
+            answers = answers,
+            onAnswer = onAnswer,
+        )
     }
 }
 
@@ -115,29 +121,37 @@ private fun WordCheckHeader(
     }
 }
 
-@Composable
-private fun WordCheckAnswerList(
+private fun ScalingLazyListScope.wordCheckAnswerList(
     answers: List<Word>,
     onAnswer: (Word) -> Unit,
+) {
+    itemsIndexed(answers) { index, answer ->
+        WordCheckAnswer(
+            answer = answer,
+            index = index,
+            onAnswer = { onAnswer(answer) },
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+}
+
+@Composable
+private fun WordCheckAnswer(
+    answer: Word,
+    index: Int,
+    onAnswer: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Column(
+    Chip(
+        label = {
+            Text(text = answer.meaning)
+        },
+        onClick = onAnswer,
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-        answers.forEachIndexed { index, answer ->
-            Chip(
-                label = {
-                    Text(text = answer.meaning)
-                },
-                onClick = { onAnswer(answer) },
-                modifier = Modifier.fillMaxWidth(),
-                icon = {
-                    Text(text = "${index + 1}")
-                },
-            )
-        }
-    }
+        icon = {
+            Text(text = "${index + 1}")
+        },
+    )
 }
 
 @Preview(device = Devices.WEAR_OS_SMALL_ROUND, showSystemUi = true)
