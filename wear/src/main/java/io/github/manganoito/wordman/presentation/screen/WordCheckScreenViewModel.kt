@@ -36,11 +36,19 @@ class WordCheckScreenViewModel @Inject constructor(
                 )
             }
             state = WordCheckScreenUiState.Loaded(
-                words = words,
+                question = words.first(),
+                answers = words.shuffled(),
             )
         }
     }
 
-    fun answer(word: Word) {
+    fun answer(answerWord: Word) {
+        val questionWord = (state as? WordCheckScreenUiState.Loaded)?.question ?: return
+        val isCorrect = questionWord == answerWord
+        state = if (isCorrect) {
+            WordCheckScreenUiState.CorrectAnswer
+        } else {
+            WordCheckScreenUiState.WrongAnswer
+        }
     }
 }

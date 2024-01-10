@@ -31,6 +31,7 @@ internal fun WordCheckScreen(
 ) {
     WordCheckScreen(
         state = viewModel.state,
+        onAnswer = viewModel::answer,
         onAnswerFinished = onAnswerFinished,
     )
 }
@@ -38,6 +39,7 @@ internal fun WordCheckScreen(
 @Composable
 private fun WordCheckScreen(
     state: WordCheckScreenUiState,
+    onAnswer: (Word) -> Unit,
     onAnswerFinished: () -> Unit,
 ) {
     when (state) {
@@ -47,7 +49,11 @@ private fun WordCheckScreen(
 
         is WordCheckScreenUiState.Loaded -> {
             WordCheckScreenContent(
-                words = state.words,
+                question = state.question,
+                answers = state.answers,
+                onAnswer = onAnswer,
+            )
+        }
 
         is WordCheckScreenUiState.CorrectAnswer -> {
             CorrectAnswerDialog(
@@ -65,14 +71,11 @@ private fun WordCheckScreen(
 
 @Composable
 private fun WordCheckScreenContent(
-    words: List<Word>,
+    question: Word,
+    answers: List<Word>,
+    onAnswer: (Word) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val answers by remember(words) {
-        mutableStateOf(
-            words.map { it.meaning }.shuffled(),
-        )
-    }
     ScalingLazyColumn(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -80,13 +83,13 @@ private fun WordCheckScreenContent(
     ) {
         item {
             WordCheckHeader(
-                word = words.first().value,
+                word = question,
             )
         }
         item {
             WordCheckAnswerList(
                 answers = answers,
-                onAnswer = { _ -> },
+                onAnswer = onAnswer,
             )
         }
     }
@@ -94,7 +97,7 @@ private fun WordCheckScreenContent(
 
 @Composable
 private fun WordCheckHeader(
-    word: String,
+    word: Word,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -106,7 +109,7 @@ private fun WordCheckHeader(
             style = MaterialTheme.typography.caption2,
         )
         Text(
-            text = word,
+            text = word.value,
             style = MaterialTheme.typography.display3,
         )
     }
@@ -114,8 +117,8 @@ private fun WordCheckHeader(
 
 @Composable
 private fun WordCheckAnswerList(
-    answers: List<String>,
-    onAnswer: (index: Int) -> Unit,
+    answers: List<Word>,
+    onAnswer: (Word) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -125,9 +128,9 @@ private fun WordCheckAnswerList(
         answers.forEachIndexed { index, answer ->
             Chip(
                 label = {
-                    Text(text = answer)
+                    Text(text = answer.meaning)
                 },
-                onClick = { onAnswer(index) },
+                onClick = { onAnswer(answer) },
                 modifier = Modifier.fillMaxWidth(),
                 icon = {
                     Text(text = "${index + 1}")
@@ -142,7 +145,12 @@ private fun WordCheckAnswerList(
 private fun WordCheckScreenPreview() = WordManPreviewTheme {
     WordCheckScreen(
         state = WordCheckScreenUiState.Loaded(
-            words = listOf(
+            question = Word(
+                id = 1,
+                value = "Word",
+                meaning = "語，単語",
+            ),
+            answers = listOf(
                 Word(
                     id = 1,
                     value = "Word",
@@ -155,6 +163,7 @@ private fun WordCheckScreenPreview() = WordManPreviewTheme {
                 ),
             ),
         ),
+        onAnswer = {},
         onAnswerFinished = {},
     )
 }

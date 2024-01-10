@@ -5,7 +5,8 @@ import io.github.manganoito.wordman.shared.model.Word
 sealed interface WordCheckScreenUiState {
     data object Loading : WordCheckScreenUiState
     data class Loaded(
-        val words: List<Word>,
+        val question: Word,
+        val answers: List<Word>,
     ) : WordCheckScreenUiState
     data object CorrectAnswer : WordCheckScreenUiState
     data object WrongAnswer : WordCheckScreenUiState
