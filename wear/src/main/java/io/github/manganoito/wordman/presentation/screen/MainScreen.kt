@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.wear.compose.material.Chip
@@ -33,7 +34,10 @@ private fun MainScreen(
         item {
             Chip(
                 label = {
-                    Text(text = "Try Word Check Now")
+                    Text(
+                        text = "Try Word Check Now",
+                        textAlign = TextAlign.Center,
+                    )
                 },
                 onClick = onWordCheckButtonClick,
             )
