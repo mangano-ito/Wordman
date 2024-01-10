@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.wear.compose.material.Card
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.CircularProgressIndicator
 import androidx.wear.compose.material.MaterialTheme
@@ -142,16 +143,12 @@ private fun WordCheckAnswer(
     onAnswer: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Chip(
-        label = {
-            Text(text = answer.meaning)
-        },
+    Card(
         onClick = onAnswer,
         modifier = modifier,
-        icon = {
-            Text(text = "${index + 1}")
-        },
-    )
+    ) {
+        Text(text = answer.meaning)
+    }
 }
 
 @Preview(device = Devices.WEAR_OS_SMALL_ROUND, showSystemUi = true)
