@@ -7,4 +7,6 @@ sealed interface WordCheckScreenUiState {
     data class Loaded(
         val words: List<Word>,
     ) : WordCheckScreenUiState
+    data object CorrectAnswer : WordCheckScreenUiState
+    data object WrongAnswer : WordCheckScreenUiState
 }

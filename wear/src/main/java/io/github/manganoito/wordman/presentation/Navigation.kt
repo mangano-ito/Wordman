@@ -23,6 +23,9 @@ fun Navigation() {
         composable(Route.WordCheck.path) {
             WordCheckScreen(
                 viewModel = hiltViewModel(),
+                onAnswerFinished = {
+                    navController.popBackStack()
+                },
             )
         }
     }

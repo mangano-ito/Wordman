@@ -18,21 +18,27 @@ import androidx.wear.compose.material.CircularProgressIndicator
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.Text
+import io.github.manganoito.wordman.presentation.component.CorrectAnswerDialog
+import io.github.manganoito.wordman.presentation.component.CorrectAnswerNotice
+import io.github.manganoito.wordman.presentation.component.WrongAnswerDialog
 import io.github.manganoito.wordman.presentation.theme.WordManPreviewTheme
 import io.github.manganoito.wordman.shared.model.Word
 
 @Composable
 internal fun WordCheckScreen(
     viewModel: WordCheckScreenViewModel,
+    onAnswerFinished: () -> Unit,
 ) {
     WordCheckScreen(
         state = viewModel.state,
+        onAnswerFinished = onAnswerFinished,
     )
 }
 
 @Composable
 private fun WordCheckScreen(
     state: WordCheckScreenUiState,
+    onAnswerFinished: () -> Unit,
 ) {
     when (state) {
         is WordCheckScreenUiState.Loading -> {
@@ -42,6 +48,16 @@ private fun WordCheckScreen(
         is WordCheckScreenUiState.Loaded -> {
             WordCheckScreenContent(
                 words = state.words,
+
+        is WordCheckScreenUiState.CorrectAnswer -> {
+            CorrectAnswerDialog(
+                onFinish = onAnswerFinished,
+            )
+        }
+
+        is WordCheckScreenUiState.WrongAnswer -> {
+            WrongAnswerDialog(
+                onFinish = onAnswerFinished,
             )
         }
     }
@@ -139,5 +155,6 @@ private fun WordCheckScreenPreview() = WordManPreviewTheme {
                 ),
             ),
         ),
+        onAnswerFinished = {},
     )
 }
