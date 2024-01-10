@@ -18,14 +18,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.wear.compose.material.AutoCenteringParams
 import androidx.wear.compose.material.Card
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.CircularProgressIndicator
+import androidx.wear.compose.material.ListHeader
 import androidx.wear.compose.material.MaterialTheme
+import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.ScalingLazyListScope
+import androidx.wear.compose.material.ScalingLazyListState
 import androidx.wear.compose.material.Text
+import androidx.wear.compose.material.TimeText
+import androidx.wear.compose.material.Vignette
+import androidx.wear.compose.material.VignettePosition
 import androidx.wear.compose.material.itemsIndexed
+import androidx.wear.compose.material.rememberScalingLazyListState
+import androidx.wear.compose.material.scrollAway
 import io.github.manganoito.wordman.presentation.component.CorrectAnswerDialog
 import io.github.manganoito.wordman.presentation.component.CorrectAnswerNotice
 import io.github.manganoito.wordman.presentation.component.WrongAnswerDialog
@@ -50,29 +59,39 @@ private fun WordCheckScreen(
     onAnswer: (Word) -> Unit,
     onAnswerFinished: () -> Unit,
 ) {
-    when (state) {
-        is WordCheckScreenUiState.Loading -> {
-            CircularProgressIndicator()
-        }
+    val listState = rememberScalingLazyListState()
+    Scaffold(
+        timeText = {
+            TimeText(modifier = Modifier.scrollAway(listState))
+        },
+        vignette = {
+            Vignette(vignettePosition = VignettePosition.TopAndBottom)
+        },
+    ) {
+        when (state) {
+            is WordCheckScreenUiState.Loading -> {
+                CircularProgressIndicator()
+            }
 
-        is WordCheckScreenUiState.Loaded -> {
-            WordCheckScreenContent(
-                question = state.question,
-                answers = state.answers,
-                onAnswer = onAnswer,
-            )
-        }
+            is WordCheckScreenUiState.Loaded -> {
+                WordCheckScreenContent(
+                    question = state.question,
+                    answers = state.answers,
+                    onAnswer = onAnswer,
+                )
+            }
 
-        is WordCheckScreenUiState.CorrectAnswer -> {
-            CorrectAnswerDialog(
-                onFinish = onAnswerFinished,
-            )
-        }
+            is WordCheckScreenUiState.CorrectAnswer -> {
+                CorrectAnswerDialog(
+                    onFinish = onAnswerFinished,
+                )
+            }
 
-        is WordCheckScreenUiState.WrongAnswer -> {
-            WrongAnswerDialog(
-                onFinish = onAnswerFinished,
-            )
+            is WordCheckScreenUiState.WrongAnswer -> {
+                WrongAnswerDialog(
+                    onFinish = onAnswerFinished,
+                )
+            }
         }
     }
 }
@@ -89,10 +108,8 @@ private fun WordCheckScreenContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
+        wordCheckHeader(word = question)
         item {
-            WordCheckHeader(
-                word = question,
-            )
             Spacer(modifier = Modifier.height(12.dp))
         }
         wordCheckAnswerList(
@@ -102,19 +119,18 @@ private fun WordCheckScreenContent(
     }
 }
 
-@Composable
-private fun WordCheckHeader(
+private fun ScalingLazyListScope.wordCheckHeader(
     word: Word,
-    modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Text(
-            text = "Remember this word?",
-            style = MaterialTheme.typography.caption2,
-        )
+    item {
+        ListHeader {
+            Text(
+                text = "Remember this word?",
+                style = MaterialTheme.typography.caption2,
+            )
+        }
+    }
+    item {
         Text(
             text = word.value,
             style = MaterialTheme.typography.display3,
