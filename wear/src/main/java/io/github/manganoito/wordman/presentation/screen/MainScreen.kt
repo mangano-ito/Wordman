@@ -9,8 +9,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.wear.compose.material.Chip
+import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.Text
+import androidx.wear.compose.material.TimeText
+import androidx.wear.compose.material.Vignette
+import androidx.wear.compose.material.VignettePosition
+import androidx.wear.compose.material.rememberScalingLazyListState
+import androidx.wear.compose.material.scrollAway
 import io.github.manganoito.wordman.presentation.theme.WordManPreviewTheme
 
 @Composable
@@ -30,17 +36,27 @@ private fun MainScreen(
     state: MainScreenUiState,
     onWordCheckButtonClick: () -> Unit,
 ) {
-    ScalingLazyColumn(modifier = Modifier.fillMaxSize()) {
-        item {
-            Chip(
-                label = {
-                    Text(
-                        text = "Try Vocabulary Check Now",
-                        textAlign = TextAlign.Center,
-                    )
-                },
-                onClick = onWordCheckButtonClick,
-            )
+    val listState = rememberScalingLazyListState()
+    Scaffold(
+        timeText = {
+            TimeText(modifier = Modifier.scrollAway(listState))
+        },
+        vignette = {
+            Vignette(vignettePosition = VignettePosition.TopAndBottom)
+        },
+    ) {
+        ScalingLazyColumn(modifier = Modifier.fillMaxSize()) {
+            item {
+                Chip(
+                    label = {
+                        Text(
+                            text = "Try Vocabulary Check Now",
+                            textAlign = TextAlign.Center,
+                        )
+                    },
+                    onClick = onWordCheckButtonClick,
+                )
+            }
         }
     }
 }
