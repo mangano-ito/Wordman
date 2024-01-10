@@ -35,7 +35,7 @@ private fun MainScreen(
             Chip(
                 label = {
                     Text(
-                        text = "Try Word Check Now",
+                        text = "Try Vocabulary Check Now",
                         textAlign = TextAlign.Center,
                     )
                 },
