@@ -13,7 +13,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "wordman"
+rootProject.name = "Wordman"
 include(":mobile")
 include(":wear")
 include(":shared")
